@@ -1,0 +1,6 @@
+@stocktracker.api_HostAddress = http://localhost:5177
+
+GET {{stocktracker.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
