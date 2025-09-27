@@ -2,7 +2,6 @@ import React, { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import type { CompanySearch } from "../../company";
 import { searchCompanies } from "../../api";
 import Navbar from "../../Components/Navbar/Navbar";
-import Hero from "../../Components/Hero/Hero";
 import Search from "../../Components/Search/Search";
 import ListPortfolio from "../../Components/Portfolio/ListPortfolio/ListPortfolio";
 import CardList from "../../Components/CardList/CardList";
@@ -49,7 +48,6 @@ const SearchPage = (props: Props) => {
   return (
     <>
       <div>
-        <Hero></Hero>
         <Search
           onSearchSubmit={onSearchSubmit}
           search={search}
