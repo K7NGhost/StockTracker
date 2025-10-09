@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using stocktracker.api.Data;
+using stocktracker.api.Helpers;
 using stocktracker.api.Interfaces;
 using stocktracker.api.Models;
 
@@ -36,12 +37,27 @@ namespace stocktracker.api.Repository
 
         public async Task<List<Comment>> GetAllAsync()
         {
-            return await _context.Comments.ToListAsync();
+            return await _context.Comments.Include(a => a.AppUser).ToListAsync();
+        }
+
+        public async Task<List<Comment>> GetAllAsync(CommentQueryObject queryObject)
+        {
+            var comments = _context.Comments.Include(a => a.AppUser).AsQueryable();
+            if (!string.IsNullOrWhiteSpace(queryObject.Symbol))
+            {
+                comments = comments.Where(s => s.Stock.Symbol == queryObject.Symbol);
+            }
+            if (queryObject.IsDescending == true)
+            {
+                comments = comments.OrderByDescending(c => c.CreatedOn);
+            }
+
+            return await comments.ToListAsync();
         }
 
         public async Task<Comment?> GetByIdAsync(int id)
         {
-            return await _context.Comments.FindAsync(id);
+            return await _context.Comments.Include(a => a.AppUser).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Comment?> UpdateAsync(int id, Comment commentModel)

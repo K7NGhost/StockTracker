@@ -1,10 +1,11 @@
-﻿using stocktracker.api.Models;
+﻿using stocktracker.api.Helpers;
+using stocktracker.api.Models;
 
 namespace stocktracker.api.Interfaces
 {
     public interface ICommentRepository
     {
-        Task<List<Comment>> GetAllAsync();
+        Task<List<Comment>> GetAllAsync(CommentQueryObject queryObject);
         Task<Comment?> GetByIdAsync(int id);
         Task<Comment?> UpdateAsync(int id, Comment commentModel);
         Task<Comment> CreateAsync(Comment commentModel);
