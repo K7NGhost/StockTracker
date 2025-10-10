@@ -4,6 +4,7 @@ import { getKeyMetrics } from "../../api";
 import RatioList from "../RatioList/RatioList";
 import type { CompanyKeyMetrics } from "../../company";
 import Spinner from "../Spinner/Spinner";
+import StockComment from "../StockComment/StockComment";
 
 type Props = {};
 
@@ -83,6 +84,7 @@ const CompanyProfile = (props: Props) => {
       {companyData ? (
         <>
           <RatioList config={tableConfig} data={companyData} />
+          <StockComment stockSymbol={ticker}></StockComment>
         </>
       ) : (
         <Spinner></Spinner>
