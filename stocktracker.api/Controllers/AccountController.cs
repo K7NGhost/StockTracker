@@ -8,7 +8,7 @@ using stocktracker.api.Models;
 
 namespace stocktracker.api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
